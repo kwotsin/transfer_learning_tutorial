@@ -223,7 +223,7 @@ def run():
 		predictions = tf.argmax(end_points['Predictions'], 1)
 		probabilities = end_points['Predictions']
 		accuracy, accuracy_update = tf.contrib.metrics.streaming_accuracy(predictions, labels)
-		metrics_op = tf.group(accuracy_update, probabilities)
+		metrics_op = tf.group(accuracy_update)
 
 
 		#Now finally create all the summaries you need to monitor and group them into one summary op.
