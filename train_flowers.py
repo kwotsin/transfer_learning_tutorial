@@ -271,7 +271,7 @@ def run():
 					print 'logits: \n', logits_value
 					print 'Probabilities: \n', probabilities_value
 					print 'predictions: \n', predictions_value
-					print 'Labels:\n:', labels_value
+					print 'Labels:\n', labels_value
 
 				#Log the summaries every 10 step.
 				if step % 10 == 0:
