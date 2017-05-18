@@ -2,6 +2,16 @@
 
 A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https://kwotsin.github.io/tech/2017/02/11/transfer-learning.html) for more information.
 
-**Update**: Note that if you're using the old TF 0.12 code that uses `loss = slim.losses.softmax_cross_entropy(predictions, one_hot_labels)`, and decide to update to using the `tf.losses.softmax_cross_entropy` function, you should also change the positions of the arguments. For instance, you should do this:  `tf.losses.softmax_cross_entropy(onehot_labels=one_hot_labels, logits=predictions)`. 
+### Common Issues:
 
-If you keep `predictions` in the first argument and `one_hot_labels` in the second argument for the `tf.losses.softmax_cross_entropy` function, you will encounter a problematic loss function that doesn't really help to train your model (as some of you have emailed me). I have updated the code to correct this issue that may be hard to detect (because the model will still train, except it trains poorly).
+**Q:** Why is my code trying to restore variables like `InceptionResnetV2/Repeat_1/block17_20/Conv2d_1x1/weights/Adam_1` when they are not found in the .ckpt file?
+
+**A:** The code is no longer trying to restore variables from the .ckpt file, but rather the log directory where the checkpoint models of your previous training is stored. This error happens when you have changed the code but did not remove the previous log directory, and so the Supervisor will attempt to restore a checkpoint from your previous training, which will result in a mismatch of variables. 
+
+**Solution: Simply remove your previous log directory and run the code again.** This applies to both your training file and your evaluation file. See this [issue](https://github.com/kwotsin/transfer_learning_tutorial/issues/2) for more information.
+
+**Q:** Why is my loss performing so poorly after I updated the loss function from `slim.losses.softmax_cross_entropy` to `tf.losses.softmax_cross_entropy`?
+
+**A:** The position of the arguments for the one-hot-labels and the predictions have changed, resulting in the wrong loss computed. This happens if you're using an older version of the repo, but I have since updated the losses to `tf.losses` and accounted for the change in argument positions.
+
+**Solution: `git pull` the master branch of the repository to get the updates.**
