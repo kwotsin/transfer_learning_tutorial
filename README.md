@@ -6,7 +6,7 @@ A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https
 
 **Q:** Why is my code trying to restore variables like `InceptionResnetV2/Repeat_1/block17_20/Conv2d_1x1/weights/Adam_1` when they are not found in the .ckpt file?
 
-**A:** The code is no longer trying to restore variables from the .ckpt file, but rather the log directory where the checkpoint models of your previous training is stored. This error happens when you have changed the code but did not remove the previous log directory, and so the Supervisor will attempt to restore a checkpoint from your previous training, which will result in a mismatch of variables. 
+**A:** The code is no longer trying to restore variables from the .ckpt file, but rather from the log directory where the checkpoint models of your previous training is stored. This error happens when you have changed the code but did not remove the previous log directory, and so the Supervisor will attempt to restore a checkpoint from your previous training, which will result in a mismatch of variables. 
 
 **Solution: Simply remove your previous log directory and run the code again.** This applies to both your training file and your evaluation file. See this [issue](https://github.com/kwotsin/transfer_learning_tutorial/issues/2) for more information.
 
