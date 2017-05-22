@@ -15,3 +15,11 @@ A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https
 **A:** The position of the arguments for the one-hot-labels and the predictions have changed, resulting in the wrong loss computed. This happens if you're using an older version of the repo, but I have since updated the losses to `tf.losses` and accounted for the change in argument positions.
 
 **Solution: `git pull` the master branch of the repository to get the updates.**
+
+**Q:** Why does the evaluation code fails to restore the checkpoint variables I had trained and saved? My training works correctly but the evaluation code crashes.
+
+**A:** There was an error in the code that mistakenly allows the saver used to restore the variables to save the model variables after the training is completed. Because we made this saver exclude some variables to be restored earlier on, these excluded variables will not be saved by this saver if we use it to save all the variables when the training to be completed. Instead, the code should have used the Supervisor's saver that exists internally to save the model variables in the end, since all trained variables will then be saved.
+
+Usually, this does not occur if you have trained your model for more than 10 minutes, since the Supervisor's saver will save the variables every 10 minutes. However, if you end your training before 10 minutes, the wrong saver would have saved only some trained variables, and not all trained variables (which is what we want).
+
+**Solution:** I have changed the training code to make the supervisor save the variables at the end of the training instead. `git pull` the master branch of the repository to get the updates or get the updated `train_flowers.py` file.
