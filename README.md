@@ -26,4 +26,4 @@ A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https
 
 Usually, this does not occur if you have trained your model for more than 10 minutes, since the Supervisor's saver will save the variables every 10 minutes. However, if you end your training before 10 minutes, the wrong saver would have saved only some trained variables, and not all trained variables (which is what we want).
 
-**Solution:** I have changed the training code to make the supervisor save the variables at the end of the training instead. `git pull` the master branch of the repository to get the updates or get the updated `train_flowers.py` file.
+**Solution: `git pull` the master branch of the repository to get the updates.** I have changed the training code to make the supervisor save the variables at the end of the training instead. 
