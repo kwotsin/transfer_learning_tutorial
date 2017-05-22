@@ -291,7 +291,7 @@ def run():
             #Once all the training has been done, save the log files and checkpoint model
             logging.info('Finished training! Saving model to disk now.')
             # saver.save(sess, "./flowers_model.ckpt")
-            saver.save(sess, sv.save_path, global_step = sv.global_step)
+            sv.saver.save(sess, sv.save_path, global_step = sv.global_step)
 
 
 if __name__ == '__main__':
