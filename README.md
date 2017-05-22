@@ -10,11 +10,15 @@ A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https
 
 **Solution: Simply remove your previous log directory and run the code again.** This applies to both your training file and your evaluation file. See this [issue](https://github.com/kwotsin/transfer_learning_tutorial/issues/2) for more information.
 
+
+
 **Q:** Why is my loss performing so poorly after I updated the loss function from `slim.losses.softmax_cross_entropy` to `tf.losses.softmax_cross_entropy`?
 
 **A:** The position of the arguments for the one-hot-labels and the predictions have changed, resulting in the wrong loss computed. This happens if you're using an older version of the repo, but I have since updated the losses to `tf.losses` and accounted for the change in argument positions.
 
 **Solution: `git pull` the master branch of the repository to get the updates.**
+
+
 
 **Q:** Why does the evaluation code fails to restore the checkpoint variables I had trained and saved? My training works correctly but the evaluation code crashes.
 
