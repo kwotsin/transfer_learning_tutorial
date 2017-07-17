@@ -183,7 +183,7 @@ def run():
         images, _, labels = load_batch(dataset, batch_size=batch_size)
 
         #Know the number steps to take before decaying the learning rate and batches per epoch
-        num_batches_per_epoch = dataset.num_samples / batch_size
+        num_batches_per_epoch = int(dataset.num_samples / batch_size)
         num_steps_per_epoch = num_batches_per_epoch #Because one step is one batch processed
         decay_steps = int(num_epochs_before_decay * num_steps_per_epoch)
 
@@ -259,7 +259,6 @@ def run():
         #Run the managed session
         with sv.managed_session() as sess:
             for step in xrange(num_steps_per_epoch * num_epochs):
-            # for step in xrange(1):
                 #At the start of every epoch, show the vital information:
                 if step % num_batches_per_epoch == 0:
                     logging.info('Epoch %s/%s', step/num_batches_per_epoch + 1, num_epochs)
