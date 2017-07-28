@@ -58,7 +58,7 @@ num_epochs_before_decay = 2
 
 #============== DATASET LOADING ======================
 #We now create a function that creates a Dataset class which will give us many TFRecord files to feed in the examples into a queue in parallel.
-def get_split(split_name, dataset_dir, file_pattern=file_pattern):
+def get_split(split_name, dataset_dir, file_pattern=file_pattern, file_pattern_for_counting='flowers'):
     '''
     Obtains the split - training or validation - to create a Dataset class for feeding the examples into a queue later on. This function will
     set up the decoder and dataset information all into one Dataset class so that you can avoid the brute work later on.
@@ -68,6 +68,7 @@ def get_split(split_name, dataset_dir, file_pattern=file_pattern):
     - split_name(str): 'train' or 'validation'. Used to get the correct data split of tfrecord files
     - dataset_dir(str): the dataset directory where the tfrecord files are located
     - file_pattern(str): the file name structure of the tfrecord files in order to get the correct data
+    - file_pattern_for_counting(str): the string name to identify your tfrecord files for counting
 
     OUTPUTS:
     - dataset (Dataset): A Dataset class object where we can read its various components for easier batch creation later.
@@ -82,7 +83,7 @@ def get_split(split_name, dataset_dir, file_pattern=file_pattern):
 
     #Count the total number of examples in all of these shard
     num_samples = 0
-    file_pattern_for_counting = 'flowers_' + split_name
+    file_pattern_for_counting = file_pattern_for_counting + '_' + split_name
     tfrecords_to_count = [os.path.join(dataset_dir, file) for file in os.listdir(dataset_dir) if file.startswith(file_pattern_for_counting)]
     for tfrecord_file in tfrecords_to_count:
         for record in tf.python_io.tf_record_iterator(tfrecord_file):
