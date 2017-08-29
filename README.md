@@ -6,7 +6,7 @@ A guide to train the inception-resnet-v2 model in TensorFlow. Visit [here](https
 
 **Q:** How do I only choose to fine-tune certain layers instead of all the layers?
 
-**A:** By default, if you did not specify an argument for `variables_to_train` in the function `create_train_op` (as seen in the `train_flowers.py` file, this argument is set to `None` and will train all the layers instead. If you want to fine-tune only certain layers, you have to pass a list of variable names to the `variables_to_train` argument. But you may ask, "how do I know the variable names of the model?" One simple way is to simply run this code within the graph context:
+**A:** By default, if you did not specify an argument for `variables_to_train` in the function `create_train_op` (as seen in the `train_flowers.py` file), this argument is set to `None` and will train all the layers instead. If you want to fine-tune only certain layers, you have to pass a list of variable names to the `variables_to_train` argument. But you may ask, "how do I know the variable names of the model?" One simple way is to simply run this code within the graph context:
 
 ```
 with tf.Graph().as_default() as graph:
