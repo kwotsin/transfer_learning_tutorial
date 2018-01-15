@@ -23,7 +23,7 @@ dataset_dir = '.'
 batch_size = 36
 
 #State the number of epochs to evaluate
-num_epochs = 3
+num_epochs = 1
 
 #Get the latest checkpoint file
 checkpoint_file = tf.train.latest_checkpoint(log_dir)
